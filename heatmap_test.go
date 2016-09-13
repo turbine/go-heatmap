@@ -60,7 +60,7 @@ const expHash = uint64(62624876249118208)
 
 func TestMkImage(t *testing.T) {
 	got := imghash.Average(Heatmap(image.Rect(0, 0, 1024, 1024),
-		testPoints, 150, 128, schemes.AlphaFire))
+		testPoints, 150, 128, schemes.AlphaFire, false))
 	if got != expHash {
 		t.Errorf("Expected hash = %v, got %v", expHash, got)
 	}

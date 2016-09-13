@@ -61,12 +61,17 @@ func (l limits) Dy() float64 {
 // dotSize is the impact size of each point on the output
 // opacity is the alpha value (0-255) of the impact of the image overlay
 // scheme is the color palette to choose from the overlay
+// exact if set to true uses the points as absolute coordinates on the image
+//   passed in, rather than re-normalizing them
 func Heatmap(size image.Rectangle, points []DataPoint, dotSize int, opacity uint8,
-	scheme []color.Color) image.Image {
+	scheme []color.Color, exact bool) image.Image {
 
 	dot := mkDot(float64(dotSize))
 
-	limits := findLimits(points)
+	limits := limits{Min: apoint{x: 0, y: 0}, Max: apoint{x: float64(size.Size().X), y: float64(size.Size().Y)}}
+	if !exact {
+		limits = findLimits(points)
+	}
 
 	// Draw black/alpha into the image
 	bw := image.NewRGBA(size)
