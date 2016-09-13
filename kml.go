@@ -39,7 +39,7 @@ func KML(size image.Rectangle, points []DataPoint, dotSize int, opacity uint8,
 		return nil, errors.New("limits out of range")
 	}
 
-	mapimg := Heatmap(size, points, dotSize, opacity, scheme)
+	mapimg := Heatmap(size, points, dotSize, opacity, scheme, false)
 
 	adjustedLimits := adjustLimits(limits, size, dotSize)
 
